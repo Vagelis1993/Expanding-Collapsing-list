@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .expandable {
+        padding: 0px;
+        margin-bottom: 5px;
+        cursor: pointer;
+      }
+
+      .sublist {
+        display: none;
+        padding-left: 20px;
+        margin-top: 5px;
+      }
+
+      .expanded > .sublist {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <ul>
+      <li class="expandable">
+        Item 1
+        <ul class="sublist">
+          <li>Subitem 1</li>
+          <li>Subitem 2</li>
+        </ul>
+      </li>
+      <li class="expandable">
+        Item 2
+        <ul class="sublist">
+          <li>Subitem 1</li>
+          <li>Subitem 2</li>
+        </ul>
+      </li>
+      <li class="expandable">
+        Item 3
+        <ul class="sublist">
+          <li>Subitem 1</li>
+          <li>Subitem 2</li>
+        </ul>
+      </li>
+    </ul>
+
+    <script>
+    
+    var expandableItems = document.getElementsByClassName("expandable");
+
+      for (var i = 0; i < expandableItems.length; i++) {
+        expandableItems[i].addEventListener("click", function (event) {
+          // Check if a sub-item was clicked
+          var subItemClicked = event.target.closest(".sublist li");
+          if (subItemClicked) {
+            return;
+          }
+
+          // Collapse the previously expanded item
+          var expandedItem = document.querySelector(".expanded");
+          if (expandedItem && expandedItem !== this) {
+            expandedItem.classList.remove("expanded");
+          }
+
+          // Toggle the "expanded" class for the current item
+          this.classList.toggle("expanded");
+        });
+      }
+    </script>
+  </body>
+</html>
